@@ -20,7 +20,7 @@ GITHUB_BLUE = (141, 200, 232)
 
 
 def send_color(color_array):
-    for i in len(color_array):
+    for i in range(len(color_array)):
         np[i] = color_array[i]
     np.write()
 
