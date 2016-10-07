@@ -1,4 +1,5 @@
-import machine, neopixel
+import machine
+import neopixel
 from time import sleep
 
 
@@ -15,6 +16,7 @@ MAGENTA = (0, 255, 255)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
+GITHUB_BLUE = (141, 200, 232)
 
 
 def send_color(color_array):
@@ -54,7 +56,7 @@ def list_rotate(lst):
     return lst
 
 
-def rotate(ring_color_data, led_count=12, rotations=5):
+def rotate(ring_color_data, led_count=led_count, rotations=5):
     data = ring_color_data
     for i in led_count * rotations:
         send_color(data)
@@ -62,7 +64,16 @@ def rotate(ring_color_data, led_count=12, rotations=5):
         sleep(0.5)
 
 
-c = send_color(static_alternate(BLUE, YELLOW))
+def blink(color, times=20):
+    for i in range(times):
+        send_color(static_plain(color))
+        sleep(0.5)
+        turn_off()
+        sleep(0.5)
+
+c = static_alternate(RED, GREEN)
+send_color(c)
 sleep(1)
 rotate(c)
 turn_off()
+blink(GITHUB_BLUE)
