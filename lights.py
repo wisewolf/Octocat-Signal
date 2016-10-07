@@ -1,6 +1,7 @@
 import machine
 import neopixel
-from time import sleep
+from math import pi, exp, sin
+from time import sleep, time
 
 
 led_count = 12
@@ -41,12 +42,16 @@ def static_alternate(color1, color2):
     return data
 
 
-# def static_gradient(color1, color2):
-#     diff = ((color2[0] - color1[0])/led_count, (color2[1] - color1[1])/led_count, (color2[2] - color1[2])/led_count)
-#     data = []
-#     for i in range(led_count):
-#         data[i] = color1 + diff * i
-#     return data
+def static_gradient(color1, color2):
+    diff = ((color2[0] - color1[0])/led_count,
+            (color2[1] - color1[1])/led_count,
+            (color2[2] - color1[2])/led_count)
+    data = [color1 for i in range(led_count)]
+    for i in range(led_count):
+        data[i] = (diff[0] * i + color1[0],
+                   diff[1] * i + color1[1],
+                   diff[2] * i + color1[2])
+    return data
 
 
 def list_rotate(lst):
@@ -71,9 +76,23 @@ def blink(color, times=20):
         turn_off()
         sleep(0.5)
 
+
+def pulse():
+    val = 0
+    for i in range(10000):
+        next_val = int((exp(sin(int(round(time()*1000))/2000.0*pi)) - 0.36787944)*108.0)
+        if val != next_val:
+            val = next_val
+            send_color(static_plain((val, val, val)))
+
+
 c = static_alternate(RED, GREEN)
 send_color(c)
 sleep(1)
 rotate(c)
 turn_off()
+c = static_gradient(YELLOW,BLUE)
+rotate(c)
 blink(GITHUB_BLUE)
+turn_off()
+pulse()
