@@ -1,6 +1,6 @@
 import machine
 import neopixel
-from math import pi, exp, sin
+from math import pi, exp, sin, floor
 from time import sleep, time
 
 
@@ -19,6 +19,16 @@ WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
 GITHUB_BLUE = (141, 200, 232)
 
+
+# Aux
+def list_rotate(lst):
+    copy = list(lst)
+    for i in range(len(lst)):
+        lst[i] = copy[i-1]
+    return lst
+
+
+# API
 
 def send_color(color_array):
     for i in range(len(color_array)):
@@ -43,22 +53,23 @@ def static_alternate(color1, color2):
 
 
 def static_gradient(color1, color2):
-    diff = ((color2[0] - color1[0])/led_count,
-            (color2[1] - color1[1])/led_count,
-            (color2[2] - color1[2])/led_count)
+    diff = ((color2[0] - color1[0])/led_count*2,
+            (color2[1] - color1[1])/led_count*2,
+            (color2[2] - color1[2])/led_count*2)
+    print diff
     data = [color1 for i in range(led_count)]
     for i in range(led_count):
-        data[i] = (diff[0] * i + color1[0],
-                   diff[1] * i + color1[1],
-                   diff[2] * i + color1[2])
+        if i < led_count/2:
+            data[i] = (diff[0] * i + color1[0],
+                       diff[1] * i + color1[1],
+                       diff[2] * i + color1[2])
+        elif i == led_count/2:
+            data[i] = color2
+        else:
+            data[i] = (diff[0] * (led_count-i) + color1[0],
+                       diff[1] * (led_count-i) + color1[1],
+                       diff[2] * (led_count-i) + color1[2])
     return data
-
-
-def list_rotate(lst):
-    copy = list(lst)
-    for i in range(len(lst)):
-        lst[i] = copy[i-1]
-    return lst
 
 
 def rotate(ring_color_data, led_count=led_count, rotations=5):
