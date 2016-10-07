@@ -58,7 +58,7 @@ def list_rotate(lst):
 
 def rotate(ring_color_data, led_count=led_count, rotations=5):
     data = ring_color_data
-    for i in led_count * rotations:
+    for i in range(led_count * rotations):
         send_color(data)
         data = list_rotate(data)
         sleep(0.5)
