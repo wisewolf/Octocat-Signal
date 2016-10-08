@@ -2,13 +2,11 @@
 """ Octocat Signal
 """
 
-import machine, neopixel
 import network
-import ujson
-
+from time import sleep
 from client import get
 
-import config
+from lights import blink, send_color, static_gradient, pulse
 import lights
 
 
@@ -23,51 +21,26 @@ def setup_network():
 
 def github_request(url, data=None):
     server = 'http://silvaneves.org/proxy/index.php?https://api.github.com'
-    headers = {
-        'Accept': '*/*',
-        'Accept-Encoding': 'gzip, deflate, compress',
-        'User-Agent': 'Octocat-Signal/1.0',
-    }
     return get(server + url)
 
 
 def read_notifications():
-    notifications = github_request('/notifications?per_page=1')
-    issues = github_request('/issues?per_page=1')
-    print(notifications)
-    print(issues)
-    return notifications, issues
+    notification = github_request('/notifications?per_page=1')
+    print(notification)
+    return notification
 
 
-def light_from(notifications, issues):
-    notifications = min(notifications, 63)
-    issues = min(issues, 63)
-    print(notifications)
-    print(issues)
-    light_state = []
-    for x in range(6):
-        if notifications % 2 == 1.0:
-            light_state.append(lights.GREEN)
-        else:
-            light_state.append(lights.WHITE)
-        notifications = int(notifications/2)
-    for x in range(6):
-        if issues % 2 == 1.0:
-            light_state.append(lights.RED)
-        else:
-            light_state.append(lights.WHITE)
-        issues = int(issues/2)
-    print(light_state)
-    return light_state
-    
-
-def update_lights(light_state):
-    lights.send_color(light_state)
-    return True
+def light_from(notification):
+    if notification == "PullRequest":
+        blink(lights.YELLOW)
+    elif notification == "Issue":
+        blink(lights.RED)
+    else:
+        send_color(static_gradient(lights.GITHUB_BLUE, lights.BLUE))
 
 
 setup_network()
-# while True:
-if 1:
-    light_state = light_from(*read_notifications())
-    update_lights(light_state)
+pulse()
+while True:
+    light_from(read_notifications())
+    sleep(60)

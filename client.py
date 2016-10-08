@@ -12,7 +12,8 @@ def get(url):
     while True:
         text = s.readline()
         print(text)
-        if text[:4] == b'Link':
-            return int(ure.search('page=([0-9]+)>; rel="last"', text).group(1))
+
+        if text[7:11] == b'type':
+            return re.search('\"type\": \"([A-Za-z]+)', s).group(1)
         if not text:
             return 0;
