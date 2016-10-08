@@ -39,8 +39,9 @@ def light_from(notification):
         send_color(static_plain(lights.GITHUB_BLUE))
 
 
+send_color(static_alternate(lights.GITHUB_BLUE, lights.BLUE))
 setup_network()
-rotate(static_alternate(lights.GITHUB_BLUE, lights.BLUE))
 while True:
+    rotate(static_alternate(lights.GITHUB_BLUE, lights.BLUE))
     light_from(read_notifications())
-    sleep(60)
+    sleep(10)

@@ -71,19 +71,19 @@ def static_gradient(color1, color2):
     return data
 
 
-def rotate(ring_color_data, led_count=led_count, rotations=5):
+def rotate(ring_color_data, led_count=led_count, rotations=5, speed = 0.1):
     data = ring_color_data
     for i in range(led_count * rotations):
         send_color(data)
         data = list_rotate(data)
-        sleep(0.5)
+        sleep(speed)
 
 
 def blink(color, times=20):
     for i in range(times):
-        send_color(static_plain(color))
-        sleep(0.5)
         turn_off()
+        sleep(0.5)
+        send_color(static_plain(color))
         sleep(0.5)
 
 
@@ -94,6 +94,7 @@ def pulse():
         if val != next_val:
             val = next_val
             send_color(static_plain((val, val, val)))
+
 
 def demo():
     while True:
