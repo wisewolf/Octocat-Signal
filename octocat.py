@@ -6,7 +6,7 @@ import network
 from time import sleep
 from client import get
 
-from lights import blink, send_color, static_gradient, pulse, static_plain
+from lights import blink, send_color, static_gradient, pulse, static_plain, static_alternate
 import lights
 
 
@@ -40,7 +40,7 @@ def light_from(notification):
 
 
 setup_network()
-pulse()
+rotate(static_alternate(lights.GITHUB_BLUE, lights.BLUE))
 while True:
     light_from(read_notifications())
     sleep(60)
