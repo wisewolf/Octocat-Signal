@@ -1,4 +1,6 @@
+
 import socket
+import ure
 
 def get(url):
     _, _, host, path = url.split('/', 3)
@@ -9,13 +11,8 @@ def get(url):
     res = ''
     while True:
         text = s.readline()
-        while text != b'\r\n':
-            print(text)
-            text = s.readline()
-
-        while text:
-            res += str(text, 'utf8')
-            text = s.readline()
-        else:
-            break
-    return res
+        print(text)
+        if text[:4] == b'Link':
+            return int(ure.search('page=([0-9]+)>; rel="last"', text).group(1))
+        if not text:
+            return 0;
