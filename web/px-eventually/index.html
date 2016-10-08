@@ -23,22 +23,31 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="signup-form" method="post" action="#">
-				<p>
-					<input type="text" name="wifinetwork" id="wifinetwork" placeholder="Wi-Fi Name Address" /> 
-				</p>
-				<p>
-					<input type="password" name="wifipassword" id="wifipassword" placeholder="Wi-Fi Password" style="width: 18em;" /> 
-				</p>
-				<br>
-				<p>
-					<input type="text" name="githublogin" id="githublogin" placeholder="GitHub Login" />
-				</p>
-				<p>
-					<input type="password" name="githubpassword" id="githubpassword" placeholder="GitHub Password" style="width: 18em;" />
-				</p> 
-				<input type="submit" value="Save" />
-			</form>
+<div style="margin: 0em 0em 10em 0em;">
+    <form id="signup-form" method="post" action="#">
+        <div>
+            <p>
+                <input type="text" name="wifinetwork" id="wifinetwork" placeholder="Wi-Fi Name Address" />
+            </p>
+            <p>
+                <input type="password" name="wifipassword" id="wifipassword" placeholder="Wi-Fi Password" style="width: 18em;" />
+            </p>
+        </div>
+        <div>
+            <p>
+                <input type="text" name="githublogin" id="githublogin" placeholder="GitHub Login" />
+            </p>
+            <p>
+                <input type="password" name="githubpassword" id="githubpassword" placeholder="GitHub Password" style="width: 18em;" />
+            </p>
+            <p>
+                <input type="text" name="githubrepo" id="githubrepo" placeholder="GitHub Repository (optional, leave blank for all notifications)" style="width: 18em;" />
+            </p>
+        </div>
+        <input type="submit" value="Save" />
+    </form>
+</div>
+
 
 		<!-- Footer -->
 			<footer id="footer">
