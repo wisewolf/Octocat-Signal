@@ -6,7 +6,7 @@ import network
 from time import sleep
 from client import get
 
-from lights import blink, send_color, static_gradient, pulse
+from lights import blink, send_color, static_gradient, pulse, static_plain
 import lights
 
 
@@ -36,7 +36,7 @@ def light_from(notification):
     elif notification == "Issue":
         blink(lights.RED)
     else:
-        send_color(static_gradient(lights.GITHUB_BLUE, lights.BLUE))
+        send_color(static_plain(lights.GITHUB_BLUE))
 
 
 setup_network()

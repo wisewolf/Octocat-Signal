@@ -108,4 +108,4 @@ def demo():
         turn_off()
         pulse()
 
-demo()
+#demo()
