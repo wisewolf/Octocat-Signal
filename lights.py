@@ -56,7 +56,6 @@ def static_gradient(color1, color2):
     diff = ((color2[0] - color1[0])/led_count*2,
             (color2[1] - color1[1])/led_count*2,
             (color2[2] - color1[2])/led_count*2)
-    print diff
     data = [color1 for i in range(led_count)]
     for i in range(led_count):
         if i < led_count/2:
@@ -97,14 +96,14 @@ def pulse():
             send_color(static_plain((val, val, val)))
 
 
-while True:
-    c = static_alternate(RED, GREEN)
-    send_color(c)
-    sleep(1)
-    rotate(c)
-    turn_off()
-    c = static_gradient(YELLOW, BLUE)
-    rotate(c)
-    blink(GITHUB_BLUE)
-    turn_off()
-    pulse()
+# while True:
+#     c = static_alternate(RED, GREEN)
+#     send_color(c)
+#     sleep(1)
+#     rotate(c)
+#     turn_off()
+#     c = static_gradient(YELLOW, BLUE)
+#     rotate(c)
+#     blink(GITHUB_BLUE)
+#     turn_off()
+#     pulse()

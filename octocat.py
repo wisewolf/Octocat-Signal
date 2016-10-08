@@ -9,6 +9,7 @@ import ujson
 from client import get
 
 import config
+import lights
 
 
 def setup_network():
@@ -40,15 +41,17 @@ def light_from(notification):
 
 
 def update_lights(light_state):
-    np = neopixel.NeoPixel(machine.Pin(4), 12)
-    np[len(light_state) % 12] = (255, 0, 0)
+    if light_state:
+        lights.send_color([lights.WHITE])
+    else:
+        lights.turn_off()
     return True
 
 
 setup_network()
 # while True:
 if 1:
-    lights = []
+    light_state = []
     for notification in read_notifications():
-        lights.append(light_from(notification))
-    update_lights(lights)
+        light_state.append(light_from(notification))
+    update_lights(light_state)
