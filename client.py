@@ -14,7 +14,7 @@ def get(url):
         print(text)
 
         if text:
-            r = re.search('\"type\":[ ]*\"([A-Za-z]+)', s)
+            r = ure.search('\"type\":[ ]*\"([A-Za-z]+)', s)
             if r:
                 return r.group(1)
         if not text:
