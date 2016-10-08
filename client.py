@@ -13,7 +13,9 @@ def get(url):
         text = s.readline()
         print(text)
 
-        if text[7:11] == b'type':
-            return re.search('\"type\": \"([A-Za-z]+)', s).group(1)
+        if text:
+            r = re.search('\"type\":[ ]*\"([A-Za-z]+)', s)
+            if r:
+                return r.group(1)
         if not text:
             return 0;
