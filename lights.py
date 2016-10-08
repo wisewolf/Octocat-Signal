@@ -95,15 +95,17 @@ def pulse():
             val = next_val
             send_color(static_plain((val, val, val)))
 
+def demo():
+    while True:
+        c = static_alternate(RED, GREEN)
+        send_color(c)
+        sleep(1)
+        rotate(c)
+        turn_off()
+        c = static_gradient(YELLOW, BLUE)
+        rotate(c)
+        blink(GITHUB_BLUE)
+        turn_off()
+        pulse()
 
-# while True:
-#     c = static_alternate(RED, GREEN)
-#     send_color(c)
-#     sleep(1)
-#     rotate(c)
-#     turn_off()
-#     c = static_gradient(YELLOW, BLUE)
-#     rotate(c)
-#     blink(GITHUB_BLUE)
-#     turn_off()
-#     pulse()
+demo()
