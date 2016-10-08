@@ -6,7 +6,7 @@ import network
 from time import sleep
 from client import get
 
-from lights import blink, send_color, static_gradient, pulse, static_plain, static_alternate
+from lights import blink, send_color, static_gradient, pulse, static_plain, static_alternate, rotate
 import lights
 
 
